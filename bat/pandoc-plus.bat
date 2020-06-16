@@ -22,17 +22,17 @@ IF ["%par1:~-4%"] == ["html"] ( set fname=%par1:~0,-5%)
 
 IF ["%par2%"] == ["docx"] (
 ::echo hi
-pandoc %par1% -s --reference-doc="%HOMEDRIVE%%HOMEPATH%\code\templates\pandoc\%par3%.docx" -o %fname%.%par2%
+pandoc %par1% -s --reference-doc="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_plus\pandoc\%par3%.docx" -o %fname%.%par2%
 )
 
 IF ["%par2%"] == ["pdf"] (
 ::echo hi
-pandoc %par1% -s -t latex+smart --filter pandoc-citeproc --data-dir="%HOMEDRIVE%%HOMEPATH%\code\templates\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links --no-highlight -o %fname%.%par2% 
+pandoc %par1% -s -t latex+smart --filter pandoc-citeproc --data-dir="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_plus\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links --no-highlight -o %fname%.%par2% 
 )
 
 IF ["%par2%"] == ["tex"] (
 ::echo hi
-pandoc %par1% -s -t latex+smart --natbib --data-dir="%HOMEDRIVE%%HOMEPATH%\code\templates\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links  --no-highlight -o %fname%.%par2% 
+pandoc %par1% -s -t latex+smart --natbib --data-dir="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_plus\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links  --no-highlight -o %fname%.%par2% 
 )
 
 IF ["%par2%"] == ["md"] (
