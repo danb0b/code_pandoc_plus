@@ -1,0 +1,25 @@
+$if(title)$
+
+\section{$title$}
+$endif$
+
+$if(from)$
+From: $from$
+$endif$
+
+$if(modified_from)$
+Modified from: $modified_from$
+$endif$
+
+$if(original_url)$
+% Original URL: $original_url$
+$endif$
+
+$body$
+
+$if(images)$
+$for(images)$
+\nocf{../images/$images$}
+
+$endfor$
+$endif$
