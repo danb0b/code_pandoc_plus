@@ -39,5 +39,5 @@ if __name__=='__main__':
     	args = ['pandoc',input,'-s','-t','latex+smart','--filter','pandoc-citeproc','--data-dir=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc','--template='+template+'.tex','--pdf-engine=xelatex',extractstring,'--wrap=none','--reference-links','--no-highlight','-o',input_name+'.'+ output_extension]
     	s = ' '.join(args)
     	print(s)
-    	subprocess.run(args,capture_output=True)    	
+    	subprocess.run(s,shell = True,check = True,stdout=subprocess.PIPE,stderr = subprocess.STDOUT)    	
 
