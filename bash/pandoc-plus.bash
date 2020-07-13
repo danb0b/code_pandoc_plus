@@ -1,4 +1,4 @@
-@echo off
+#!/bin/bash
 
 ::filename
 set par1=%1
