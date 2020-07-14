@@ -39,6 +39,8 @@ def process_file(input_file_exp,output_extension,template):
             s = ' '.join(args)
         elif output_extension == 'docx':
             s='pandoc '+input_file+' -s --reference-doc=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc/'+template+'.docx -o '+input_name+'.'+output_extension
+        elif output_extension == 'odt':
+            s='pandoc '+input_file+' -s -o '+input_name+'.'+output_extension
         elif output_extension == 'tex':
             s='pandoc '+input_file+' -s -t latex+smart --natbib --data-dir=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links  --no-highlight -o '+input_name+'.'+ output_extension
         elif output_extension =='md':
