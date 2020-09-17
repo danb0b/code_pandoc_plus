@@ -10,6 +10,14 @@ import yaml
 import sys
 import subprocess
 import glob
+import sys
+import pandoc_plus
+
+module = sys.modules['pandoc_plus']
+initfile = module.__file__
+project_path = initfile.split(os.path.sep)
+project_path = os.path.sep.join(project_path[:-3])
+pandoc_dir = os.path.join(project_path,'pandoc')
 
 def process_file(input_file_exp,output_extension,template):
 
@@ -35,14 +43,14 @@ def process_file(input_file_exp,output_extension,template):
             extractstring = ''
     
         if output_extension == 'pdf':
-            args = ['pandoc',input_file,'-s','-t','latex+smart','--filter','pandoc-citeproc','--data-dir=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc','--template='+template+'.tex','--pdf-engine=xelatex',extractstring,'--wrap=none','--reference-links','--no-highlight','-o',input_name+'.'+ output_extension]
+            args = ['pandoc',input_file,'-s','-t','latex+smart','--filter','pandoc-citeproc','--data-dir='+pandoc_dir,'--template='+template+'.tex','--pdf-engine=xelatex',extractstring,'--wrap=none','--reference-links','--no-highlight','-o',input_name+'.'+ output_extension]
             s = ' '.join(args)
         elif output_extension == 'docx':
-            s='pandoc '+input_file+' -s --reference-doc=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc/'+template+'.docx -o '+input_name+'.'+output_extension
+            s='pandoc '+input_file+' -s --reference-doc='+pandoc_dir+'/'+template+'.docx -o '+input_name+'.'+output_extension
         elif output_extension == 'odt':
             s='pandoc '+input_file+' -s -o '+input_name+'.'+output_extension
         elif output_extension == 'tex':
-            s='pandoc '+input_file+' -s -t latex+smart --natbib --data-dir=/home/danaukes/code_danb0b/code_pandoc_plus/pandoc --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links  --no-highlight -o '+input_name+'.'+ output_extension
+            s='pandoc '+input_file+' -s -t latex+smart --natbib --data-dir='+pandoc_dir+' --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links  --no-highlight -o '+input_name+'.'+ output_extension
         elif output_extension =='md':
             s='pandoc '+input_file+' -s --wrap=none --reference-links '+extractstring+' --atx-headers -t markdown-raw_html-bracketed_spans-native_spans-native_divs-fenced_divs -o '+input_name+'.'+ output_extension
             # s='pandoc '+input_file+' -s --wrap=none --reference-links '+extractstring+' --atx-headers -t markdown-raw_html-bracketed_spans-native_spans-native_divs-fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o '+input_name+'.'+ output_extension
