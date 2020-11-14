@@ -43,7 +43,7 @@ def process_file(input_file_exp,output_extension,template):
             extractstring = ''
     
         if output_extension == 'pdf':
-            args = ['pandoc',input_file,'-s','-t','latex+smart','--filter','pandoc-citeproc','--data-dir='+pandoc_dir,'--template='+template+'.tex','--pdf-engine=xelatex',extractstring,'--wrap=none','--reference-links','--no-highlight','-o',input_name+'.'+ output_extension]
+            args = ['pandoc',input_file,'-s','-t','latex+smart','--citeproc','--data-dir='+pandoc_dir,'--template='+template+'.tex','--pdf-engine=xelatex',extractstring,'--wrap=none','--reference-links','--no-highlight','-o',input_name+'.'+ output_extension]
             s = ' '.join(args)
         elif output_extension == 'docx':
             s='pandoc '+input_file+' -s --reference-doc='+pandoc_dir+'/'+template+'.docx -o '+input_name+'.'+output_extension

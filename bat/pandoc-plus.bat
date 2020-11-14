@@ -27,7 +27,7 @@ pandoc %par1% -s --reference-doc="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_
 
 IF ["%par2%"] == ["pdf"] (
 ::echo hi
-pandoc %par1% -s -t latex+smart --filter pandoc-citeproc --data-dir="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_plus\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links --no-highlight -o %fname%.%par2% 
+pandoc %par1% -s -t latex+smart --citeproc --data-dir="%HOMEDRIVE%%HOMEPATH%\code_danb0b\code_pandoc_plus\pandoc" --template=%par3%.tex --pdf-engine=xelatex %extractstring%--wrap=none --reference-links --no-highlight -o %fname%.%par2% 
 )
 
 IF ["%par2%"] == ["tex"] (
