@@ -31,7 +31,7 @@ def process_file(input_file_exp,output_extension,template):
     input_files = glob.glob(input_file_exp)
     for input_file in input_files:
         
-        input_name,input_extension = input_file.split('.')
+        input_name,input_extension = os.path.splitext(input_file)
         
         
         
