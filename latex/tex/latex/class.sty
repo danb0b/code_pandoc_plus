@@ -6,8 +6,6 @@
 \providecommand\myparskip{0.5em}
 \providecommand\myparindent{0em}
 \providecommand\myheaderskip{0.5em}
-\providecommand\myfont{Roboto}
-\providecommand\mysansfont{Roboto-Black}
 \providecommand\mypagenumber{1}
 %\providecommand\mytitle{}
 %\providecommand\mysubtitle{}
@@ -23,10 +21,15 @@
 
 \usepackage[no-math]{fontspec}    
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{\myfont}
-%\setromanfont{\myfont}
-\setsansfont{\mysansfont}
-
+\setmainfont{Open Sans}[
+  %Numbers=OldStyle,
+  ItalicFont={* Italic},
+  BoldFont={Open Sans SemiBold}]
+% Define  official colors
+\setsansfont{Open Sans}[
+  %Numbers=OldStyle,
+  ItalicFont={* Italic},
+  BoldFont={Open Sans SemiBold}]
 % Define  official colors
 \usepackage[dvinames]{xcolor}
 \definecolor{crimson}{RGB}{152,30,50}
@@ -82,8 +85,8 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyfoot{}
 \fancyfoot[C]{
-  \ifthenelse{\equal{\mypagenumber}{1}}{\arabic{page}}{} \\
-  \ifthenelse{\isundefined{\mycopyright}}{}{\scriptsize Copyright \textcopyright \the\year\ \mycopyright. \normalsize} \\
+  \ifthenelse{\equal{\mypagenumber}{1}}{\arabic{page}\\}{} 
+  \ifthenelse{\isundefined{\mycopyright}}{}{{\scriptsize Copyright \textcopyright \the\year\ \mycopyright. \normalsize \\}} 
   {\scriptsize THIS CONTENT IS PROTECTED AND MAY NOT BE SHARED, UPLOADED, SOLD, OR DISTRIBUTED.}
 }
 
