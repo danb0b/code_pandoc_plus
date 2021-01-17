@@ -32,14 +32,12 @@ def process_file(input_file_exp,output_extension):
         
         input_name,input_extension = os.path.splitext(input_file)
         
-        
-    
         if output_extension == 'pdf':
-            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 '+input_file+' -o '+input_name+'.'+output_extension
+            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
         elif output_extension == 'tex':
-            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 '+input_file+' -o '+input_name+'.'+output_extension
+            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
         elif output_extension =='pptx':
-            s='pandoc -s --slide-level=2 '+input_file+' -o '+input_name+'.'+ output_extension
+            s='pandoc -s --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+ output_extension+'"'
         
         print(s)
         subprocess.run(s,shell = True,check = True,stdout=subprocess.PIPE,stderr = subprocess.STDOUT)        
