@@ -1,4 +1,4 @@
 #!/usr/bin/sh
 
-echo "export PYTHONPATH=\$PYTHON:$PWD/python" >> ~/.bashrc
+echo "export PYTHONPATH=\$PYTHONPATH:$PWD/python" >> ~/.bashrc
 
