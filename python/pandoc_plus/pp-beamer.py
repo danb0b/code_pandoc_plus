@@ -33,9 +33,14 @@ def process_file(input_file_exp,output_extension):
         input_name,input_extension = os.path.splitext(input_file)
         
         if output_extension == 'pdf':
-            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+            s='pandoc '+project_path+'/bat/beamer_default.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+            
         elif output_extension == 'tex':
-            s='pandoc '+project_path+'/bat/header-includes.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+            s='pandoc '+project_path+'/bat/beamer_default.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+
+        elif output_extension in ['slidy','slideous','s5','dzslides','revealjs']:
+            s='pandoc -s -t '+output_extension+' --slide-level=2 -V slideous-url="file:///c:/web/slideous" -V s5-url="c:/web/s5" -V revealjs-url="file:///c:/web/reveal.js" "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+
         elif output_extension =='pptx':
             s='pandoc -s --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+ output_extension+'"'
         
