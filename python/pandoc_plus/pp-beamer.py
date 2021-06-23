@@ -15,9 +15,12 @@ import pandoc_plus
 
 module = sys.modules['pandoc_plus']
 initfile = module.__file__
-project_path = initfile.split(os.path.sep)
-project_path = os.path.sep.join(project_path[:-3])
-pandoc_dir = os.path.join(project_path,'pandoc')
+project_path = os.path.sep.join(os.path.normpath(initfile).split(os.path.sep)[:-3])
+module_path = os.path.sep.join(os.path.normpath(initfile).split(os.path.sep)[:-1])
+support_path = os.path.join(project_path,'support')
+slideous_path = os.path.join(support_path,'slideous')
+s5_path = os.path.join(support_path,'s5')
+revealjs_path = os.path.join(support_path,'reveal.js')
 
 def process_file(input_file_exp,output_extension):
 
@@ -39,7 +42,7 @@ def process_file(input_file_exp,output_extension):
             s='pandoc '+project_path+'/bat/beamer_default.yaml -s -t beamer --pdf-engine=xelatex --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
 
         elif output_extension in ['slidy','slideous','s5','dzslides','revealjs']:
-            s='pandoc -s -t '+output_extension+' --slide-level=2 -V slideous-url="file:///c:/web/slideous" -V s5-url="c:/web/s5" -V revealjs-url="file:///c:/web/reveal.js" "'+input_file+'" -o "'+input_name+'.'+output_extension+'"'
+            s='pandoc -s -t '+output_extension+' --slide-level=2 -V slideous-url="'+slideous_path+'" -V s5-url="'+s5_path+'" -V revealjs-url="'+revealjs_path+'" "'+input_file+'" -o "'+input_name+'.html"'
 
         elif output_extension =='pptx':
             s='pandoc -s --slide-level=2 "'+input_file+'" -o "'+input_name+'.'+ output_extension+'"'
