@@ -15,13 +15,14 @@ import pandoc_plus
 
 module = sys.modules['pandoc_plus']
 initfile = module.__file__
-project_path = os.path.sep.join(os.path.normpath(initfile).split(os.path.sep)[:-3])
-module_path = os.path.sep.join(os.path.normpath(initfile).split(os.path.sep)[:-1])
-support_path = os.path.join(project_path,'support')
-slidy_path = os.path.join(support_path,'slidy2')
-slideous_path = os.path.join(support_path,'slideous')
-s5_path = os.path.join(support_path,'s5-11','ui','default')
-revealjs_path = os.path.join(support_path,'reveal.js')
+project_path = '/'.join(os.path.normpath(initfile).split(os.path.sep)[:-3])
+module_path = '/'.join(os.path.normpath(initfile).split(os.path.sep)[:-1])
+support_path = '/'.join([project_path,'support'])
+support_path = 'file:///'+ support_path
+slidy_path = '/'.join([support_path,'slidy2'])
+slideous_path = '/'.join([support_path,'slideous'])
+s5_path = '/'.join([support_path,'s5-11','ui','default'])
+revealjs_path = '/'.join([support_path,'reveal.js'])
 
 def process_file(input_file_exp,output_extension):
 
