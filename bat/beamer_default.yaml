@@ -12,7 +12,6 @@ fontsize: 12pt
 urlcolor: red
 linkstyle: bold
 aspectratio: 43
-titlegraphic: "C:/web/fulton.png"
 #titlepage-note: |
 #  This is a the note that goes on the title page. This talk is to be 
 #  given at Doing DH.
