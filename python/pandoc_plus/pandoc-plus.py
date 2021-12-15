@@ -56,8 +56,9 @@ def process_file(input_file_exp,output_extension,template):
             s='pandoc "'+input_file+'" -s --wrap=none --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'"'
         
         print(s)
-        subprocess.run(s,shell = True,check = True,stdout=subprocess.PIPE,stderr = subprocess.STDOUT)        
-    
+        result = subprocess.run(s,shell = True,check = True,capture_output=True)
+        return result        
+        
 if __name__=='__main__':
     # import argparse
     # parser = argparse.ArgumentParser()
@@ -70,5 +71,5 @@ if __name__=='__main__':
     output_extension = sys.argv[2]
     template = sys.argv[3]
 
-    process_file(input_file,output_extension,template)
+    result = process_file(input_file,output_extension,template)
 
