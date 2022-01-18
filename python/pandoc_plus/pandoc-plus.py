@@ -53,7 +53,7 @@ def process_file(input_file_exp,output_extension,template):
             s='pandoc "'+input_file+'" -s -t latex+smart --natbib --data-dir='+pandoc_dir+' --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links  --no-highlight -o "'+input_name+'.'+ output_extension+'"'
         elif output_extension =='md':
 #            s='pandoc "'+input_file+'" -s --wrap=none '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'"'
-            s='pandoc "'+input_file+'" -s --wrap=none --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'"'
+            s='pandoc "'+input_file+'" -s --wrap=none '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'"'
         
         print(s)
         result = subprocess.run(s,shell = True,check = True,capture_output=True)
