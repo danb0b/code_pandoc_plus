@@ -19,16 +19,27 @@ project_path = initfile.split(os.path.sep)
 project_path = os.path.sep.join(project_path[:-3])
 pandoc_dir = os.path.join(project_path,'pandoc')
 
-def process_file(input_file_exp,output_extension,template):
+def process_file(path,output_extension,template):
 
 
     output_extension = output_extension.strip()
-    input_file_exp = input_file_exp.strip()
+    input_files = []
+    for item in path:
+        input_file_exp = item.strip()
+
+        print('input: ',input_file_exp,', output extension: ', output_extension)
+
+        input_files.extend(glob.glob(input_file_exp))
+        # for input_file in input_files:
+
+    input_file_string = '"'+'" "'.join(input_files)+'"'
+    input_name,dummy = os.path.splitext(input_files[0])
+
     template = template.strip()
 
     print('input: ',input_file_exp,', output extension: ', output_extension,', template: ',template)
 
-    input_files = glob.glob(input_file_exp)
+    # input_files = glob.glob(input_file_exp)
     for input_file in input_files:
         
         input_name,input_extension = os.path.splitext(input_file)
@@ -57,9 +68,20 @@ def process_file(input_file_exp,output_extension,template):
         
         print(s)
         result = subprocess.run(s,shell = True,check = True,capture_output=True)
-        return result        
+    return 
         
 if __name__=='__main__':
+    
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path',metavar='path',type=str,help='path', default = None,nargs='+')
+    parser.add_argument('-o',dest='output_extension',default = None)
+    parser.add_argument('-t',dest='template',default = None)
+    args = parser.parse_args()
+    
+    
+    path = [os.path.normpath(os.path.expanduser(item)) for item in args.path]
+
     # import argparse
     # parser = argparse.ArgumentParser()
     # parser.add_argument('-i',dest='input',default = None)
@@ -67,9 +89,9 @@ if __name__=='__main__':
     # parser.add_argument('-t',dest='template',default = None)
     # args = parser.parse_args()
 
-    input_file = sys.argv[1]
-    output_extension = sys.argv[2]
-    template = sys.argv[3]
+    # input_file = sys.argv[1]
+    # output_extension = sys.argv[2]
+    # template = sys.argv[3]
 
-    result = process_file(input_file,output_extension,template)
+    result = process_file(path,args.output_extension,args.template)
 
