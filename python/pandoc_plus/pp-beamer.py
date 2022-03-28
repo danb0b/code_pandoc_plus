@@ -64,7 +64,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('path',metavar='path',type=str,help='path', default = None,nargs='+')
 
-    # parser.add_argument('-i',dest='input',default = None)
+    parser.add_argument('-i',dest='incremental',action='store_true', default = False)
     parser.add_argument('-o',dest='output_extension',default = None)
     parser.add_argument('-d','--debug',dest='debug',action='store_true', default = False)
     parser.add_argument('-s','--self-contained',dest='self_contained',action='store_true', default = False)
