@@ -19,8 +19,7 @@ project_path = initfile.split(os.path.sep)
 project_path = os.path.sep.join(project_path[:-3])
 pandoc_dir = os.path.join(project_path,'pandoc')
 
-def process_file(path,output_extension,template,merge):
-
+def process_file(path,output_extension,template,merge,tables):
 
     output_extension = output_extension.strip()
     input_files = []
@@ -50,9 +49,9 @@ def process_file(path,output_extension,template,merge):
     else:
         for input_file in input_files:
             input_name,input_extension = os.path.splitext(input_file)
-            process_internal(input_file,input_name,input_extension,output_extension,template)
+            process_internal(input_file,input_name,input_extension,output_extension,template,tables)
 
-def process_internal(input_file_string,input_name,input_extension,output_extension,template):
+def process_internal(input_file_string,input_name,input_extension,output_extension,template,tables):
 
     input_extension = input_extension[1:].lower()
     if  input_extension == "docx":
@@ -68,12 +67,14 @@ def process_internal(input_file_string,input_name,input_extension,output_extensi
     elif output_extension == 'docx':
         s='pandoc -s --reference-doc='+pandoc_dir+'/'+template+'.docx -o "'+input_name+'.'+output_extension+'" '+input_file_string
     elif output_extension == 'odt':
-        s='pandoc -s -o "'+input_name+'.'+output_extension+'" '+input_file_string
+        s='pandoc -s --reference-doc='+pandoc_dir+'/'+template+'.odt -o "'+input_name+'.'+output_extension+'" '+input_file_string
     elif output_extension == 'tex':
         s='pandoc -s -t latex+smart --natbib --data-dir='+pandoc_dir+' --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links -o "'+input_name+'.'+ output_extension+'" '+input_file_string
     elif output_extension =='md':
-        s='pandoc -s --wrap=none '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'" '+input_file_string
-        #s='pandoc -s --wrap=none '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'" '+input_file_string
+        if tables=='all':
+            s='pandoc -s --wrap=none  --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'" '+input_file_string
+        else: 
+            s='pandoc -s --wrap=none  --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'" '+input_file_string
     
     print(s)
     result = subprocess.run(s,shell = True,check = True,capture_output=True)
@@ -87,6 +88,7 @@ if __name__=='__main__':
     parser.add_argument('-o',dest='output_extension',default = None)
     parser.add_argument('-t',dest='template',default = None)
     parser.add_argument('-m','--merge',dest='merge',action='store_true', default = False)
+    parser.add_argument('--tables',dest='tables',default = None)
     args = parser.parse_args()
     
     
@@ -103,5 +105,5 @@ if __name__=='__main__':
     # output_extension = sys.argv[2]
     # template = sys.argv[3]
 
-    result = process_file(path,args.output_extension,args.template,args.merge)
+    result = process_file(path,args.output_extension,args.template,args.merge,args.tables)
 
