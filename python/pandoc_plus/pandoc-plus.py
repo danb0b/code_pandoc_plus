@@ -56,7 +56,6 @@ def process_internal(input_file_string,input_name,input_extension,output_extensi
     input_extension = input_extension[1:].lower()
     if  input_extension == "docx":
         extract_dir = input_name+'_media'
-        os.mkdir(extract_dir)
         extractstring = '--extract-media="./'+extract_dir+'" '
     else:
         extractstring = ''
@@ -71,10 +70,11 @@ def process_internal(input_file_string,input_name,input_extension,output_extensi
     elif output_extension == 'tex':
         s='pandoc -s -t latex+smart --natbib --data-dir='+pandoc_dir+' --template='+template+'.tex --pdf-engine=xelatex '+extractstring+'--wrap=none --reference-links -o "'+input_name+'.'+ output_extension+'" "'+input_file_string+'"'
     elif output_extension =='md':
-        if tables=='all':
-            s='pandoc -s --wrap=none  --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'" "'+input_file_string+'"'
-        else: 
+        if tables=='simple':
             s='pandoc -s --wrap=none  --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs-grid_tables-multiline_tables-simple_tables+pipe_tables -o "'+input_name+'.'+ output_extension+'" "'+input_file_string+'"'
+        else:
+            s='pandoc -s --wrap=none  --reference-links '+extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'" "'+input_file_string+'"'
+
     
     print(s)
     result = subprocess.run(s,shell = True,check = True,capture_output=True)
