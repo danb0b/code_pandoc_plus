@@ -54,7 +54,7 @@ def process_file(path,output_extension,template,merge,tables,reference_links):
 def process_internal(input_file_string,input_name,input_extension,output_extension,template,tables,reference_links):
 
     input_extension = input_extension[1:].lower()
-    if  input_extension == "docx":
+    if  (input_extension == "docx") or (input_extension == "odt"):
         extract_dir = input_name+'_media'
         extractstring = '--extract-media="./'+extract_dir+'" '
     else:
