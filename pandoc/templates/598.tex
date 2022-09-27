@@ -1,7 +1,3 @@
-\providecommand\myparskip{2em}
-\providecommand\myheaderskip{2em}
-
-
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
@@ -191,22 +187,6 @@ $if(outertheme)$
 \useoutertheme{$outertheme$}
 $endif$
 $endif$
-
-\usepackage{titlesec}
-
-\titleformat{\section}{\sffamily\Large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\sffamily\large\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\sffamily\normalsize\bfseries}{\thesubsubsection}{1em}{}
-\titleformat{\paragraph}[runin]{\sffamily\itshape\bfseries}{\theparagraph}{1em}{}
-\titleformat{\subparagraph}[runin]{\sffamily\itshape}{\thesubparagraph}{1em}{}
-
-\titlespacing{\section}{0em}{\myheaderskip}{0em}
-\titlespacing{\subsection}{0em}{\myheaderskip}{0em}
-\titlespacing{\subsubsection}{0em}{0em}{0em}
-\titlespacing{\paragraph}{0em}{0em}{2em}
-\titlespacing{\subparagraph}{0em}{0em}{2em}
-
-
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -221,7 +201,7 @@ $else$
     \usepackage{parskip}
   }{% else
     \setlength{\parindent}{0pt}
-    \setlength{\parskip}{\myparskip}}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
@@ -354,9 +334,40 @@ $if(block-headings)$
 \fi
 $endif$
 $endif$
-$if(pagestyle)$
-\pagestyle{$pagestyle$}
-$endif$
+
+
+\usepackage{graphicx}
+\usepackage[absolute]{textpos}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrule}{}
+\fancypagestyle{mystyle}
+{
+\fancyhead{}
+\fancyhead[L]{
+\begin{textblock*}{6.5in}[0,1](1in,.95in)
+  {{\Huge{\textbf{\sffamily{MSN/EGR 598}}}}}
+\end{textblock*}
+}
+\fancyhead[R]{
+  \begin{textblock*}{6.5in}[0,1](1in,.95in)
+    \includegraphics[height=.5in]{institution-logo.pdf}
+  \end{textblock*}
+}
+
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot{}
+\fancyfoot[C]{
+  {\arabic{page}\\} 
+  {\scriptsize Copyright \textcopyright \the\year\ Dan Aukes. \normalsize \\}
+  {\scriptsize THIS CONTENT IS PROTECTED AND MAY NOT BE SHARED, UPLOADED, SOLD, OR DISTRIBUTED.}
+}
+}
+\AtBeginDocument{}
+
+\AtEndDocument{}
+\pagestyle{mystyle}
+
 $if(csl-refs)$
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
@@ -457,6 +468,8 @@ $if(logo)$
 $endif$
 $endif$
 
+
+
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
@@ -466,6 +479,7 @@ $if(beamer)$
 \frame{\titlepage}
 $else$
 \maketitle
+\thispagestyle{mystyle}
 $endif$
 $if(abstract)$
 \begin{abstract}
