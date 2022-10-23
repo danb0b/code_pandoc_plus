@@ -344,12 +344,14 @@ $endif$
 \fancypagestyle{mystyle}
 {
 \fancyhead{}
+
+$if(course_num)$
 \fancyhead[L]{
 \begin{textblock*}{6.5in}[0,1](1in,.95in)
-  {\includegraphics[height=.5in]{egr557_logo}}
-%  {{\Huge{\textbf{\sffamily{EGR557}}}}}
+  {{\Huge{\textbf{\sffamily{$course_num$}}}}}
 \end{textblock*}
 }
+$endif$
 \fancyhead[R]{
   \begin{textblock*}{6.5in}[0,1](1in,.95in)
     \includegraphics[height=.5in]{institution-logo.pdf}
@@ -360,7 +362,7 @@ $endif$
 \fancyfoot{}
 \fancyfoot[C]{
   {\arabic{page}\\} 
-  {\scriptsize Copyright \textcopyright \the\year\ Dan Aukes. \normalsize \\}
+  {\scriptsize Copyright \textcopyright \the\year\ Daniel M. Aukes. \normalsize \\}
   {\scriptsize THIS CONTENT IS PROTECTED AND MAY NOT BE SHARED, UPLOADED, SOLD, OR DISTRIBUTED.}
 }
 }
