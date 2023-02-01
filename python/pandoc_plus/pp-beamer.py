@@ -23,7 +23,7 @@ slideous_path = 'file:///' + '/'.join([support_path,'slideous'])
 s5_path = 'file:///' + '/'.join([support_path,'s5-11','ui','default'])
 revealjs_path = 'file:///' + '/'.join([support_path,'reveal.js'])
 
-def process_file(path,output_extension,self_contained=False):
+def process_file(path,output_extension,theme,self_contained=False):
 
 
     output_extension = output_extension.strip()
@@ -45,12 +45,17 @@ def process_file(path,output_extension,self_contained=False):
         
     elif output_extension in ['slidy','slideous','s5','dzslides','revealjs']:
 
+        if theme is not None:
+            theme_string = '--variable theme="'+theme+'" '
+        else:
+            theme_string = ''
+
         if self_contained:
             self_contained_string = '--self-contained '
         else:
             self_contained_string = ''
 
-        s='pandoc -s '+self_contained_string+'-t '+output_extension+' --slide-level=2 -V slidy-url="'+slidy_path+'" -V slideous-url="'+slideous_path+'" -V s5-url="'+s5_path+'" -V revealjs-url="'+revealjs_path+'" -o "'+input_name+'.html" '+input_file_string 
+        s='pandoc -s '+self_contained_string+'-t '+output_extension+' --slide-level=2 '+theme_string+'-V slidy-url="'+slidy_path+'" -V slideous-url="'+slideous_path+'" -V s5-url="'+s5_path+'" -V revealjs-url="'+revealjs_path+'" -o "'+input_name+'.html" '+input_file_string 
 
     elif output_extension =='pptx':
         s='pandoc -s --slide-level=2 -o "'+input_name+'.'+ output_extension+'" '+input_file_string 
@@ -68,6 +73,8 @@ if __name__=='__main__':
     parser.add_argument('-o',dest='output_extension',default = None)
     parser.add_argument('-d','--debug',dest='debug',action='store_true', default = False)
     parser.add_argument('-s','--self-contained',dest='self_contained',action='store_true', default = False)
+    parser.add_argument('-t','--theme',dest='theme', default = None)
+
     # parser.add_argument('-t',dest='template',default = None)
     args = parser.parse_args()
 
@@ -80,5 +87,5 @@ if __name__=='__main__':
         print('path: ',path)
         print('output_extension: ',args.output_extension)
 
-    result = process_file(path,args.output_extension,args.self_contained)
+    result = process_file(path,args.output_extension,args.theme,args.self_contained)
 
