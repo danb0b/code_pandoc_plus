@@ -55,7 +55,7 @@ def process_file(path,output_extension,theme,self_contained=False):
         else:
             self_contained_string = ''
 
-        s='pandoc -s '+self_contained_string+'-t '+output_extension+' --slide-level=2 '+theme_string+'-V slidy-url="'+slidy_path+'" -V slideous-url="'+slideous_path+'" -V s5-url="'+s5_path+'" -V revealjs-url="'+revealjs_path+'" -o "'+input_name+'.html" '+input_file_string 
+        s='pandoc -s --mathjax '+self_contained_string+'-t '+output_extension+' --slide-level=2 '+theme_string+'-V slidy-url="'+slidy_path+'" -V slideous-url="'+slideous_path+'" -V s5-url="'+s5_path+'" -V revealjs-url="'+revealjs_path+'" -o "'+input_name+'.html" '+input_file_string 
 
     elif output_extension =='pptx':
         s='pandoc -s --slide-level=2 -o "'+input_name+'.'+ output_extension+'" '+input_file_string 
