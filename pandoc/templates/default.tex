@@ -1,6 +1,20 @@
-\providecommand\myparskip{2em}
-\providecommand\myheaderskip{2em}
+$if(heading-skip-before)$
+\providecommand\myheadingskipbefore{$heading-skip-before$}
+$else$
+\providecommand\myheadingskipbefore{2em}
+$endif$
 
+$if(heading-skip-after)$
+\providecommand\myheadingskipafter{$heading-skip-after$}
+$else$
+\providecommand\myheadingskipafter{0em}
+$endif$
+
+$if(par-skip)$
+\providecommand\myparskip{$par-skip$}
+$else$
+\providecommand\myparskip{2em}
+$endif$
 
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
@@ -218,8 +232,8 @@ $endif$
 \titleformat{\paragraph}[runin]{\sffamily\itshape\bfseries}{\theparagraph}{1em}{}
 \titleformat{\subparagraph}[runin]{\sffamily\itshape}{\thesubparagraph}{1em}{}
 
-\titlespacing{\section}{0em}{\myheaderskip}{0em}
-\titlespacing{\subsection}{0em}{\myheaderskip}{0em}
+\titlespacing{\section}{0em}{\myheadingskipbefore}{\myheadingskipafter}
+\titlespacing{\subsection}{0em}{\myheadingskipbefore}{\myheadingskipafter}
 \titlespacing{\subsubsection}{0em}{0em}{0em}
 \titlespacing{\paragraph}{0em}{0em}{2em}
 \titlespacing{\subparagraph}{0em}{0em}{2em}
