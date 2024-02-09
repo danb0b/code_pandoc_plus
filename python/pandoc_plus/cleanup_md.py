@@ -1,4 +1,4 @@
-#!/home/danaukes/anaconda3/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jul 14 09:39:54 2020
