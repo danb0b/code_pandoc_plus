@@ -21,7 +21,7 @@ support_path = '/'.join([project_path,'support'])
 slidy_path = 'file:///' + '/'.join([support_path,'slidy2'])
 slideous_path = 'file:///' + '/'.join([support_path,'slideous'])
 s5_path = 'file:///' + '/'.join([support_path,'s5-11','ui','default'])
-revealjs_path = 'file:///' + '/'.join([support_path,'reveal.js'])
+revealjs_path = 'file:///' + '/'.join([support_path,'node_modules','reveal.js'])
 mathjax_path = 'file:///'+'/'.join([support_path,'node_modules','mathjax','es5','tex-chtml-full.js'])
 
 def process_file(path,output_extension,theme,self_contained=False):
@@ -34,9 +34,9 @@ def process_file(path,output_extension,theme,self_contained=False):
 
         print('input: ',input_file_exp,', output extension: ', output_extension)
 
-        input_files.extend(glob.glob(input_file_exp))
+        input_files.extend(sorted(glob.glob(input_file_exp)))
         # for input_file in input_files:
-        
+    
     input_file_string = '"'+'" "'.join(input_files)+'"'
     input_name,dummy = os.path.splitext(input_files[0])
     
