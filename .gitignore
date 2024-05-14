@@ -1,2 +1,5 @@
 **/__pycache__/**
 support/node_modules/reveal.js/*
+**/build/**
+**/dist/**
+**.egg-info
