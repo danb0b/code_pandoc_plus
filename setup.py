@@ -8,6 +8,8 @@ Please see LICENSE for full license.
 from setuptools import setup
 import sys
 import shutil
+import idealab_tools.setup_tools as st
+import pandoc_plus
 
 shutil.rmtree("build", ignore_errors=True)
 shutil.rmtree("dist", ignore_errors=True)
@@ -19,7 +21,11 @@ packages.append('pandoc_plus')
 
 package_data = {}
 package_data['pandoc_plus'] = []
-# package_data['pandoc_plus'].append('support/config.yaml')
+
+source_dest = st.include_entire_directory(pandoc_plus.support_dir,'support')
+dest = [item[1] for item in source_dest]
+
+package_data['pandoc_plus'].extend(dest)
 
 setup_kwargs = {}
 setup_kwargs['name']='pandoc_plus'
@@ -34,6 +40,6 @@ setup_kwargs['packages']=packages
 setup_kwargs['package_dir']={'pandoc_plus' : 'python/pandoc_plus'}
 setup_kwargs['package_data'] = package_data
 setup_kwargs['install_requires']=[]
-setup_kwargs['scripts'] = ['python/pandoc_plus/pandoc-plus','python/pandoc_plus/pandoc-plus.py','python/pandoc_plus/pp-beamer','python/pandoc_plus/pp-beamer.py']
+setup_kwargs['scripts'] = ['python/pandoc_plus/pandoc-plus','python/pandoc_plus/pp-beamer']
   
 setup(**setup_kwargs)
