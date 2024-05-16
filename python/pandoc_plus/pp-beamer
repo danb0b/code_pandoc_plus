@@ -21,6 +21,9 @@ support_path = '/'.join([module_path,'support'])
 revealjs_path = 'file:///' + '/'.join([support_path,'node_modules','reveal.js'])
 mathjax_path = 'file:///'+'/'.join([support_path,'node_modules','mathjax','es5','tex-chtml-full.js'])
 
+s = os.path.abspath(os.path.normpath(os.path.expanduser('~/mytex')))+'//:'+os.path.join(module_path,'support','texmf')+'//:'
+os.environ["TEXINPUTS"] = s
+
 def process_file(path,output_extension,theme,self_contained=False):
 
 

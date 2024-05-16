@@ -19,6 +19,9 @@ project_path = initfile.split(os.path.sep)
 project_path = os.path.sep.join(project_path[:-1])
 pandoc_dir = os.path.join(project_path,'support')
 
+s = os.path.abspath(os.path.normpath(os.path.expanduser('~/mytex')))+'//:'+os.path.join(project_path,'support','texmf')+'//:'
+os.environ["TEXINPUTS"] = s
+
 def process_file(path,output_extension,template,merge,tables,reference_links):
 
     output_extension = output_extension.strip()
@@ -80,9 +83,10 @@ def process_internal(input_file_string,input_name,input_extension,output_extensi
         else:
             s='pandoc -s --wrap=none  '+reference_links_string +extractstring+' --markdown-headings=atx -t markdown-raw_html-bracketed_spans-native_spans-native_divs+fenced_divs -o "'+input_name+'.'+ output_extension+'" "'+input_file_string+'"'
 
+    # s = 'echo $TEXINPUTS && '+ s
     
     print(s)
-    result = subprocess.run(s,shell = True,check = True,capture_output=True)
+    result = subprocess.run(s,shell = True,check = True,capture_output=False)
     return 
         
 if __name__=='__main__':
