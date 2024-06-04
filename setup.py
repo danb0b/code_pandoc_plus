@@ -9,6 +9,10 @@ from setuptools import setup
 import sys
 import shutil
 import idealab_tools.setup_tools as st
+import os
+current_path = os.path.join(os.path.abspath(os.path.split(__file__)[0]),'python')
+print(current_path)
+sys.path.append(current_path)
 import pandoc_plus
 
 shutil.rmtree("build", ignore_errors=True)
