@@ -33,7 +33,7 @@ package_data['pandoc_plus'].extend(dest)
 
 setup_kwargs = {}
 setup_kwargs['name']='pandoc_plus'
-setup_kwargs['version']='0.0.2'
+setup_kwargs['version']='0.0.3'
 setup_kwargs['classifiers']=['Programming Language :: Python','Programming Language :: Python :: 3']   
 setup_kwargs['description']='Pandoc-plus is a collection of tools for making it easier to run pandoc'
 setup_kwargs['author']='Dan Aukes'
