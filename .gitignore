@@ -3,3 +3,7 @@ support/node_modules/reveal.js/*
 **/build/**
 **/dist/**
 **.egg-info
+python/pandoc_plus/support/templates/book.aux
+python/pandoc_plus/support/templates/book.fdb_latexmk
+python/pandoc_plus/support/templates/book.fls
+python/pandoc_plus/support/templates/book.log
